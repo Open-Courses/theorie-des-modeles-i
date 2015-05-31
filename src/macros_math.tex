@@ -18,7 +18,7 @@
 \def\inter{\cap} %Intersection
 \newcommand{\comp}[1]{#1^{c}} %Complementary
 \def\cartprod{\cross}
-\newcommand{\cardinal}[1]{\#(#1)}
+\newcommand{\cardinal}[1]{|#1|}
 %-------------------------------------------------------------------------------
 
 %Topology
@@ -184,13 +184,12 @@
 \newcommand{\jacobienneMatrix}[2]{J_{#1}(#2)}
 \newcommand{\hessienneMatrix}[2]{\mathcal{H}_{#1}(#2)}
 %-------------------------------------------------------------------------------
-
 %Model theory
 
-\def\La{\mathcal{L}}
-\def\Th{\mathcal{T}}
-\def\SA{\mathcal{A}}
-\def\SB{\mathcal{B}}
+\def\satisfies{\vdash}
+\newcommand{\lang}[1]{\mathcal{#1}}
+\newcommand{\theory}[1]{\mathcal{#1}}
+\newcommand{\struct}[1]{\mathcal{#1}}
 
 %Ultraproduct
 %	1 : indice elements
@@ -204,16 +203,15 @@
 %	2 : set which contains indices
 %	3 : ultrafilter
 %	4 : model
-\newcommand{\GSultrapower}[4]{\displaystyle {\prod_{#1 \in #2}}^{#3} #4}
+\newcommand{\ultrapower}[4]{\displaystyle {\prod_{#1 \in #2}}^{#3} #4}
 
 %Substructures
-\newcommand{\GSsubstructure}[2]{#1 \subseteq #2}
+\def\substructure{\subseteq}
 
 %Elementary Substructures.
-\newcommand{\GSelemSubstructure}[2]{#1 \preceq #2}
+\def\elemSubstructure{\preceq}
 
-%Elementary equivalent structures
-\newcommand{\GSelemEquivStructure}[3]{#2 \equiv_{#1} #3}
+\def\existentiallyClosed{\underset{e.c}{\subseteq}}
 %-------------------------------------------------------------------------------
 
 %Hilbert space

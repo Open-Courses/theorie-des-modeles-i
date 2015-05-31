@@ -24,7 +24,309 @@
 
 \maketitle
 
+\section{Définition}
 
+\begin{definition} [Complexité d'une formule]
+	Soient $\lang{L}$ un langage, et $\phi$ une $\lang{L}$-formule.
+
+	On définit \textbf{la complexité de $\phi$} comme le nombre de
+	quantificateurs universels ou existentiels contenus dans la formule.  Une
+	formule sans quantificateurs est de complexité $0$.
+\end{definition}
+
+\begin{definition} [$\kappa$-catégorique]
+	Soient $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie consistante.
+
+	Soit $\kappa$ un cardinal infini.
+
+	On dit que $\theory{T}$ est \textbf{$\kappa$-catégorique} si tous les
+	modèles de $\theory{T}$ de cardinalité $\kappa$ sont isomorphes,
+	c'est-à-dire que tous les modèles de cardinalité $\kappa$ répondent aux
+	mêmes théories, ie satisfont les mêmes formules.
+\end{definition}
+
+\begin{proposition}
+	La théorie des $\rational$ espaces vectoriels est $\aleph_{1}$-catégorique.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition} [Groupe divisible]
+	Soit $G$ un groupe abélien. On dit que $G$ est \textbf{divisible} si pour
+	tout $n \in \naturel_{0}$, pour tout $g \in G$, il existe $h \in G$ tel que
+	$g = \underbrace{h \cdots h}_{n \text{ fois}}$.
+\end{definition}
+
+La théorie des groupes abéliens divisibles comportent une liste dénombrable
+d'axiomes (au premier ordre). En effet, il faut citer, pour chaque $n$, l'axiome
+cité dans la définition.
+
+\begin{proposition}
+	Soient $\theory{T}_{D}$ la théorie des groupes abéliens divisibles, et
+	$\theory{T}_{\rational}$ la théorie des $\rational$-espaces vectoriels.
+
+	Alors, si $\struct{A}$ est un modèle de $\theory{T}_{D}$, alors $\struct{A}$ est
+	un modèle de $\theory{T}_{\rational}$.
+
+	En d'autres termes, tout groupe divisible abélien peut être vu comme un
+	$\rational$-espace vectoriel.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition} [Modèle-complète]
+	Soit $\lang{L}$ un langage, et $\theory{T}$ une $\lang{L}$-théorie.
+	On dit que \textbf{$\theory{T}$ est modèle-complète} si toute sous-structure
+	est élémentaire, c'est-à-dire, si pour tous $\struct{A}$, $\struct{B}$ tel
+	que $\struct{A} \substructure \struct{B}$, on a $\struct{A}
+	\elemSubstructure \struct{B}$.
+\end{definition}
+
+\begin{definition} [Existentiellement clos]
+	Soit $\lang{L}$ un langage.
+
+	Soient $\struct{A}$, $\struct{B}$ deux $\lang{L}$-structures tel que
+	$\struct{A} \substructure \struct{B}$.
+
+	On dit que \textbf{$\struct{A}$ est existentiellement clos dans
+	$\struct{B}$}, noté $\struct{A} \existentiallyClosed \struct{B}$, si toute
+	formule existentielle à paramètres dans $\struct{A}$ est vraie dans
+	$\struct{A}$ et dans $\struct{B}$.
+\end{definition}
+
+\section{Théorèmes de Lowenheim Skolem}
+
+\subsection{Enoncés et preuves}
+
+\begin{theorem} [Test de Tarski-Vaught]
+	\label{theorem:tarski_vaught}
+	Soit $\lang{L}$ un langage.
+
+	Soient $\struct{A}$, $\struct{B}$ deux $\lang{L}$-structures tel que
+	$\struct{A} \substructure \struct{B}$.
+
+	Alors, les assertions suivantes sont équivalentes.
+
+	\begin{itemize}
+		\item $\struct{A} \elemSubstructure \struct{B}$
+		\item Pour toute $\lang{L}$-formule $\phi(x, \vec{y})$ où $\vec{y} =
+			(y_{1}, \dots, y_{m}) $, pour tout uple $\vec{a} = (a_{1}, \dots,
+			a_{m}) \in A^{m}$, si $\struct{B} \models \exists x \, \phi(x,
+			\vec{a})$, alors $\exists b \in A, \struct{A} \models \phi(b,
+			\vec{a})$.
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+Donnons maintenant le théorème de Lowenheim Skolem (descendant).
+
+\begin{theorem} [Théorème de Lowenheim-Skolem descendant]
+	Soit $\lang{L}$ un langage dénombrable.
+
+	Soit $\struct{A}$ une $\lang{L}$-structure, et $E \subseteq A$.
+
+	Alors il existe une sous-structure élémentaire $\struct{A}_{0}$ de
+	$\struct{A}$ contenue dans $A$ tel que $\cardinal{A_{0}} \leq
+	\aleph_{0}$.
+	\label{theorem:lowenheim_skolem_descendant}
+\end{theorem}
+
+Ce théorème est très important, et assez impressionnant. En effet, il signifie
+que si on prend une quelconque structure sur un langage donné, nous pouvons
+trouver une structure au plus dénombrable qui répond aux mêmes formules que
+notre structure de départ. C'est-à-dire que nous pouvons trouver des structures
+aussi petites qu'on veut répondant à la théorie de notre structure initiale.
+
+\begin{proof}
+
+\end{proof}
+
+Nous obtenons également une version montante, dans le sens que nous pouvons
+aussi trouver des structures aussi grandes qu'on souhaite qui garde la même théorie.
+
+\begin{theorem} [Théorème de Lowenheim-Skolem montant]
+	Soit $\lang{L}$ un langage dénombrable.
+
+	Soit $\struct{A}$ une $\lang{L}$-structure, et $\kappa$ tel que
+	$\GSset{\cardinal{A}, \aleph_{0}} \leq \kappa$ un cardinal.
+
+	Alors il existe une structure $\struct{B}$ tel que $\struct{A}
+	\elemSubstructure \struct{B}$ tel que $\cardinal{B} = \kappa$.
+	\label{theorem:lowenheim_skolem_montant}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+\subsection{Applications}
+
+Nous obtenons directement un corollaire des théorèmes de Lowenheim-Skolem.
+
+\begin{corollary}
+	\label{lemma:complete_equiv_elementaire_equivalentes}
+	Soit $\lang{L}$ un langage, et soit $\theory{T}$ une $\lang{L}$-théorie.
+
+	Alors les assertions suivantes sont équivalentes.
+
+	\begin{itemize}
+		\item $\theory{T}$ est complète.
+		\item Tous les modèles de $\theory{T}$ sont élémentairement équivalents.
+	\end{itemize}
+\end{corollary}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{exemple}
+	La théorie des ordres denses n'est pas complète car on peut construire la
+	théorie des ordres denses avec extrémités, et la théorie des ordres denses
+	sans extrémités, dont les modèles ne sont pas tous élémentairement
+	équivalents. Par exemple, si on prend le modèle de la théorie des ordres
+	denses avec comme ensemble de base $[0, 1]$, nous n'avons pas qu'il est
+	élémentairement équivalent au modèle sur $]0, 1[$ car il existe un minimum dans
+	le premier, et non dans le second.
+\end{exemple}
+
+\begin{theorem} [Théorème de Vaught]
+	\label{theorem:vaught}
+	Soient $\lang{L}$ un langage, et $\theory{T}$ une $\lang{L}$-théorie
+	consistante, $\kappa$-catégorique ne
+	comportant que des modèles infinis.
+
+	Alors $\theory{T}$ est complète.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+Remarquons que la condition que $\theory{T}$ ne possède que des modèles infinis
+est essentiels. En effet, s'il possède un modèle fini, de cardinalité $n$ par exemple, alors la formule:
+
+\begin{equation}
+	\phi(x) := \exists a_{1}, \cdots, \exists a_{n} x = a_{b}
+\end{equation}
+
+est vraie dans le modèle fini, mais non dans un modèle infini. Un exemple est
+la théorie des groupes abéliens dont tous les éléments sont d'ordre $2$, qui est
+laissé en exercice.
+
+
+\section{Elimination des quantificateurs}
+
+\begin{definition}
+	\label{definition:elimination_quantificateurs}
+	Soit $\lang{L}$ un langage, et soit $\theory{T}$ une $\lang{T}$-théorie.
+
+	On dit que $\theory{T}$ a \textbf{l'élimination des quantificateurs} si
+	pour toute $\lang{L}$-formule $\phi(\vec{x})$, il existe une
+	$\lang{L}$-formule sans quantificateurs $\theta(\vec{x})$ tel que
+
+	\begin{equation}
+		T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \equiv \theta(\vec{x}))]
+	\end{equation}
+\end{definition}
+
+\begin{exemple}
+	\begin{itemize}
+		\item La théorie des corps algébriquement clos ($ACF$) possède l'élimination des
+	quantificateurs.
+		\item Sur le langage $\lang{L} = (+, -, ., <, 0, 1)$, la théorie $T :=
+			Th_{\lang{L}}(\real, +, -, ., <, 0, 1)$ (interprétation usuelle) a
+			l'élimination des quantificateurs.
+		\item Sur le langage $\lang{L} = (+, -, ., 0, 1)$, la théorie $T :=
+			Th_{\lang{L}}(\real, +, -, ., 0, 1)$ (interprétation usuelle) n'a pas
+			l'élimination des quantificateurs.
+	\end{itemize}
+\end{exemple}
+
+Par le dernier exemple, nous remarquons que le langage a de l'importance.
+
+La définition que nous avons donnée pour l'élimination des quantificateurs est
+une définition purement syntaxique: il n'y a aucune structure qui apparaît.
+On pourrait se demander s'il est possible d'obtenir un critère équivalent
+purement sémantique.
+
+Nous sommes alors mené au théorème suivant.
+
+\begin{theorem}
+	\label{theorem:critere_eq_formule_par_formule}
+	Soit $\lang{L}$ un langage comportant au moins un symbole de constante, et
+	soit $\theory{T}$ une $\lang{L}$-théorie consistante.
+
+	Soit $\phi(\vec{x})$ une $\lang{L}$-formule.
+
+	Alors les assertions suivantes sont équivalentes.
+
+	\begin{itemize}
+		\item Il existe une formule sans quantificateurs $\theta(\vec{x})$ tel
+			que
+			\begin{equation}
+				T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \equiv
+				\theta(\vec{x}))]
+			\end{equation}
+		\item Pour tous modèles $\struct{A}$, $\struct{B}$ de $\theory{T}$,
+			toutes sous-structures $\struct{C}$ de $\struct{A}$ et $\struct{B}$,
+			et tout $\vec{a} \subseteq C$, on a
+			\begin{equation}
+				\struct{A} \models \phi(\vec{a}) \equiv \struct{B} \models
+				\phi(\vec{a})
+			\end{equation}
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{proposition}
+	Soit $\lang{L}$ un langage, et soit $\theory{T}$ une $\lang{L}$-théorie
+	modèle-complète. Alors $\theory{T}$ a l'élimination des quantificateurs.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{remarque}
+	La réciproque n'est pas vraie. En effet, la théorie $Th_{\lang{L}}(\real, +,
+	-, ., 0 1)$ est modèle-complète mais n'a pas l'élimination des
+	quantificateurs.
+\end{remarque}
+
+\section{Ensemble définissable}
+
+
+\section{Exercices}
+
+\begin{exercice}
+	La théorie des ordres denses sans extrémités est $\aleph_{0}$-catégorique.
+\end{exercice}
+
+\begin{exercice}
+	La théorie des groupes abéliens dont tous les éléments sont d'ordre $2$
+	n'est pas complète mais est $\aleph_{0}$ catégorique.
+\end{exercice}
+
+\begin{exercice}
+	La théorie $Th_{\lang{L}}{(\real, +, -, ., 0, 1)}$ où $\lang{L} = (+, -, .,
+	0, 1)$ n'a pas l'élimination des quantificateurs.
+\end{exercice}
+
+\begin{exercice}
+	La théorie $Th_{\lang{L}}{(\real, +, -, ., 0, 1)}$ où $\lang{L} = (+, -, .,
+	0, 1)$ est modèle-complète.
+\end{exercice}
 \end{document}
 
 
