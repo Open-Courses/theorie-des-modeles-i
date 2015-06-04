@@ -191,6 +191,19 @@
 \newcommand{\theory}[1]{\mathcal{#1}}
 \newcommand{\struct}[1]{\mathcal{#1}}
 
+%Definissable set
+%	1 : order of the definissable sets
+%	2 : the l-structure which we define the definissable sets on.
+\newcommand{\definissableSet}[2][]
+{
+	Def^{#1}(#2)
+}
+
+%Type set
+%	1 : n if it's the set of n-types.
+%	2 : the theory which we build the types on.
+\newcommand{\typeSet}[2]{S_{#1}(#2)}
+
 %Ultraproduct
 %	1 : indice elements
 %	2 : set which contains indices
