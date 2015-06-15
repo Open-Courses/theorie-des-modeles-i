@@ -11,7 +11,7 @@ noproof:
 	cd $(SRC_DIR) && $(CC) -output-directory ../ $(SRC)
 	cd $(SRC_DIR) && $(CC) -output-directory ../ $(SRC)
 
-zip: fclean $(NAME)
+zip: fclean noproof
 	$(MAKE) clean
 	zip -r $(NAME).zip . -x *.git*
 

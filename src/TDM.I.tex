@@ -2,12 +2,15 @@
 %     Created: Son Mai 31 07:00  2015 C
 % Last Change: Son Mai 31 07:00  2015 C
 %
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 12pt]{report}
+
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
+
+\usepackage{exercise}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -24,7 +27,130 @@
 
 \maketitle
 
-\section{Définition}
+\tableofcontents
+
+\chapter{Rappels de mathématiques générales}
+
+\section{Topologie}
+
+\begin{definition} [Point isolé]
+	Soit $(X, \tau)$ un espace topologique et soit $p_{0} \in X$.
+
+	On dit que $p_{0}$ est \textbf{un point isolé} si $\GSset{p_{0}} \in \tau$
+	ie $\GSset{p_{0}}$ est un ouvert.
+\end{definition}
+
+\begin{proposition}
+	Soit $(X, \tau)$ un espace topologique compact infini.
+
+	Alors $(X, \tau)$ possède un point isolé.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\section{Théorie des groupes}
+
+\begin{definition} [Groupe divisible]
+	Soit $G$ un groupe abélien. On dit que $G$ est \textbf{divisible} si pour
+	tout $n \in \naturel_{0}$, pour tout $g \in G$, il existe $h \in G$ tel que
+	$g = \underbrace{h \cdots h}_{n \text{ fois}}$.
+\end{definition}
+
+\begin{definition} [Elément de torsion d'un groupe]
+	Soit $G$ un groupe et soit $g \in G$.
+
+	On dit que $g$ est \textbf{un élément de torsion de $G$} si $g$ est d'ordre
+	fini.
+\end{definition}
+
+\begin{definition} [Torsion d'un groupe]
+	Soit $G$ un groupe.
+	L'ensemble des éléments de torsion de $G$ est un sous-groupe de $G$ et est appelé
+	\textbf{la torsion du groupe}.
+\end{definition}
+
+\begin{definition} [Groupe avec torsion et sans torsion]
+	Soit $G$ un groupe.
+
+	On dit que $G$ est \textbf{un groupe avec torsion} si sa torsion est
+	lui-même.
+	Sinon, il est dit \textbf{sans torsion}.
+
+	En d'autres mots, un groupe avec torsion est un groupe dont tous les
+	éléments sont d'ordre fini.
+\end{definition}
+
+\section{Théorie des corps}
+
+Rappelons, à travers les deux théorèmes suivants, qu'un corps est contenu dans
+un corps algébriquement clos unique à isomorphisme près.
+
+\begin{theorem}
+	Soit $K$ un corps. Alors il existe un corps algébriquement clos $\Omega$
+	contenant $K$.
+\end{theorem}
+
+\begin{theorem}
+	Soient $K$ corps, $\Omega_{1}$ et $\Omega_{2}$ algébriquement clos contenant
+	$K$.
+
+	Soit $F_{1}$ (resp. $F_{2}$) la cloture algébrique de $K$ dans $\Omega_{1}$
+	(resp. dans $\Omega_{2}$).
+
+	Alors il existe un isomorphisme $K$-linéaire entre $F_{1}$ et $F_{2}$. En
+	d'autres termes, $F_{1}$ et $F_{2}$ sont isomorphes.
+\end{theorem}
+
+\begin{proposition}
+	Soit $K$ un corps algébriquement clos.
+
+	Alors, $K$ est infini.
+
+	En d'autres termes, tout corps algébriquement clos est infini.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+	Si $K$ est fini de cardinalité $n$, notons ses éléments $a_{1}, \dots,
+	a_{n}$. Alors $p(x) = (x - a_{1}) . (x - a_{2}) . \dots . (x - a_{n}) + 1$ a
+	une racine dans $K$ comme $K$ est algébriquement clos et $p(x) \in K[X]$.
+
+	Or, cette racine est clairement différente de $a_{1}, \dots, a_{n}$ car
+	$p(a_{i}) = 1 \neq 0$.
+\end{proof}
+\fi
+
+\chapter{Définitions et propositions de bases}
+
+\section{Syntaxique}
+
+\begin{definition} [$\lang{L}$-énoncé]
+	Soit $\lang{L}$ un langage et soit $\phi$ une $\lang{L}$-formule.
+
+	On dit que $\phi$ est \textbf{un $\lang{L}$-énoncé} s'il ne comporte pas de
+	variable libre.
+
+	Pour rappel, une variable est dite \textbf{libre} si elle n'est pas
+	quantifiée. Si elle est quantifiée, on dit qu'elle est \textbf{muette}.
+\end{definition}
+
+\begin{exemple}
+	Soit $\lang{L} = \GSset{+, <}$.
+
+	\begin{enumerate}
+		\item $\phi_{1} = \forall X_{1} \, \, \forall X_{2} \, \, (X_{1} + X_{2} <
+			X_{1})$ est une $\lang{L}$-formule qui est un
+			$\lang{L}$-énoncé car les variables $X_{1}$ et $X_{2}$ utilisées
+			sont quantifiées.
+		\item $\phi_{2}(X_{1}, X_{2}) = X_{2} < X_{1}$ est une
+			$\lang{L}$-formule qui n'est pas un $\lang{L}$-énoncé car $X_{1}, X_{2}$
+			sont des variables libres.
+	\end{enumerate}
+\end{exemple}
 
 \begin{definition} [Complexité d'une formule]
 	Soient $\lang{L}$ un langage, et $\phi$ une $\lang{L}$-formule.
@@ -33,6 +159,340 @@
 	quantificateurs universels ou existentiels contenus dans la formule.  Une
 	formule sans quantificateurs est de complexité $0$.
 \end{definition}
+
+\begin{exemple}
+	Prenons le langage $\lang{L} = \GSset{+, ., 0, 1}$
+	\begin{enumerate}
+		\item $\phi(x_{1}, x_{2}) = \forall x_{1} \, \exists x_{2} \, \, [(x_{1} .
+		x_{2} = x_{2} . x_{1}) \wedge (x_{1} . x_{2} = 1)]$ est de complexité
+			$2$ car il y a un quantificateur universel et un quantificateur existentiel.
+		\item $\phi = \neg (1 = 0)$ est de complexité $0$ car il y a aucun
+			quantificateur.
+	\end{enumerate}
+\end{exemple}
+
+\begin{notation} [Ensemble des $\lang{L}$-énoncés et des $\lang{L}$-formules]
+	Soit $\lang{L}$ un langage.
+
+	On note l'ensemble des $\lang{L}$-énoncés par $E_{\lang{L}}$, et l'ensemble
+	des $\lang{L}$-formules par $F_{\lang{L}}$.
+
+	On a bien sûr $E_{\lang{L}} \subseteq F_{\lang{L}}$.
+\end{notation}
+
+\begin{definition} [$\lang{L}$-théorie]
+	Soit $\lang{L}$ un langage.
+
+	Une \textbf{$\lang{L}$-théorie $\theory{T}$} est un sous-ensemble de
+	$\lang{L}$-énoncés ie $\theory{T} \subseteq E_{\lang{L}}$.
+\end{definition}
+
+\begin{exemple} [Théorie des ordres denses]
+	Prenons le langage $\lang{L}_{<} = \GSset{<}$ où $<$ est un symbole de relation
+	binaire.
+
+	On définit \textbf{la $\lang{L}_{<}$-théorie des ordres denses}, notée
+	$\theory{T}_{o, d}$ comme l'ensemble des $\lang{L}_{<}$-énoncés suivants:
+
+	\begin{enumerate}
+		\item $\forall x \, \forall y \, \forall z \, [(x < y \wedge y < z)
+			\implies x < z]$ (transitivité de la relation d'ordre strict).
+		\item $\forall x \, \forall y \, \exists z \, (x < z < y)$.
+	\end{enumerate}
+
+	Ces $\lang{L}_{<}$-formules sont bien des $\lang{L}_{<}$-énoncés car toutes les
+	variables utilisées sont bien quantifiées, et donc aucun variable n'est libre.
+
+	Quand nous travaillons avec la $\lang{L}_{<}$-théorie $\theory{T}_{o, d}$, la
+	relation binaire est appelée 'ordre strict'.
+\end{exemple}
+
+Nous allons enrichir la $\lang{L}_{<}$-théorie $\theory{T}_{o, d}$ des ordres
+denses donnée précédemment.
+
+\begin{exemple} [Théorie des ordres denses avec extrémités et sans extrémités]
+	Reprenons l'exemple précédent.
+
+	On définit \textbf{la $\lang{L}_{<}$-théorie des ordres denses avec extrémités},
+	notée $\theory{T}_{o, d, a}$, comme l'ensemble des $\lang{L}_{<}$-énoncés suivants:
+
+	\begin{enumerate}
+		\item $\forall x \, \forall y \, \forall z \, [(x < y \wedge y < z)
+			\implies x < z]$ (transitivité de la relation d'ordre strict).
+		\item $\forall x \, \forall y \, \exists z \, (x < z < y)$.
+		\item $\exists x \, \exists y \, \forall z \, (x < z < y)$.
+	\end{enumerate}
+
+	Les deux premiers $\lang{L}_{<}$-énoncés sont ceux de la
+	$\lang{L}_{<}$-théorie $\theory{T}_{o, d}$. On a rajouté un énoncé qui
+	signifie que les éléments sont bornés.
+
+	On définit \textbf{la $\lang{L}_{<}$-théorie des ordres denses sans extrémités},
+	notée $\theory{T}_{o, d, s}$, comme l'ensemble des $\lang{L}_{<}$-énoncés suivants:
+
+	\begin{enumerate}
+		\item $\forall x \, \forall y \, \forall z \, [(x < y \wedge y < z)
+			\implies x < z]$ (transitivité de la relation d'ordre strict).
+		\item $\forall x \, \forall y \, \exists z \, (x < z < y)$.
+		\item $\forall x \, \exists y \, \exists z \, (z < x \wedge x < y)$.
+	\end{enumerate}
+
+	Le dernier énoncé dit qu'il y ni de minimum, ni de maximum.
+\end{exemple}
+
+\begin{definition} [Conséquence d'une $\lang{L}$-théorie]
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie.
+
+	Soit $\sigma$ un $\lang{L}$-énoncé.
+
+	On dit que $\sigma$ est \textbf{une conséquence de $\theory{T}$} s'il existe une
+	preuve de $\sigma$ dans $\theory{T}$.
+
+	On dit que \textbf{$\theory{T}$ prouve $\sigma$} ou \textbf{$\theory{T}$
+satisfait $\sigma$}, et on note $\theory{T} \satisfies \sigma$.
+
+	On note l'ensemble des conséquences de $\theory{T}$ par
+	$Conseq(\theory{T})$.
+\end{definition}
+
+\begin{definition} [$\lang{L}$-théorie syntaxiquement consistante]
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie.
+
+	On dit que $\theory{T}$ est \textbf{(syntaxiquement) consistante} si pour tout $\lang{L}$-énoncé
+	$\sigma \in E_{\lang{L}}$,
+	\begin{equation}
+		\cardinal{Conseq(\theory{T}) \inter \GSset{\sigma, \neg \sigma}} \leq 1
+	\end{equation}
+\end{definition}
+
+L'expression 'syntaxiquement consistante' est peu utilisée. En effet, nous
+définirons dans la section suivante la consistance d'une $\lang{L}$-théorie de
+manière purement sémantique, et montrerons, grace au théorème de Godel, que ces
+deux définitions sont équivalentes.
+
+Cependant, tant que nous n'aurons pas démontré le théorème de Godel, nous
+préciserons le terme syntaxiquement et le mettrons entre parenthèses.
+
+\begin{definition} [$\lang{L}$-théorie finiment (syntaxiquement) consistante]
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie.
+
+	On dit que $\theory{T}$ est \textbf{finiment (syntaxiquement) consistante} si
+	pour tout sous-ensemble fini $\Sigma$ de $\theory{T}$, $\Sigma$ est
+	(syntaxiquement) consistante.
+\end{definition}
+
+\begin{definition}
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie
+	(syntaxiquement) consistante.
+
+	On dit que $\theory{T}$ est \textbf{complète} si, pour tout
+	$\lang{L}$-énoncé $\sigma$, $\theory{T} \inter \GSset{\sigma, \neg \sigma}$
+	est un singleton, c'est-à-dire
+	\begin{equation}
+		\cardinal{Conseq(\theory{T}) \inter \GSset{\sigma, \neg \sigma}} = 1
+	\end{equation}
+
+	En d'autres termes, pour toute $\lang{L}$-énoncé $\sigma$, il faut que soit
+	$\sigma$ soit une conséquence de $\theory{T}$, soit que $\neg \sigma$ soit
+	une conséquence de $\theory{T}$.
+
+	Remarquons que comme $\theory{T}$ est (syntaxiquement) consistante, $\theory{T}$ ne prouve
+	pas $\sigma$ et $\neg \sigma$ en même temps.
+\end{definition}
+
+\section{Sémantique}
+
+\begin{definition} [Théorie d'une $\lang{L}$-structure]
+	Soit $\lang{L}$ un langage et soit $\struct{A}$ une $\lang{L}$-structure.
+
+	On définit \textbf{la $\lang{L}$-théorie de $\struct{A}$}, notée
+	$T_{\lang{L}}(\struct{A})$, comme l'ensemble
+	\begin{equation}
+		T_{\lang{L}}(\struct{A}) = \GSsetDef{\phi \in E_{\lang{L}}}{\struct{A}
+	\models \phi}
+	\end{equation}
+	c'est-à-dire l'ensemble des $\lang{L}$-énoncés satisfaits dans $\struct{A}$.
+\end{definition}
+
+\begin{definition} [Modèle]
+	Soit $\lang{L}$ un langage et soit $\Sigma$ un ensemble de $\lang{L}$-énoncés.
+
+	Soit $\struct{A}$ une $\lang{L}$-structure.
+
+	On dit que $\struct{A}$ est \textbf{un modèle de $\Sigma$} si $\Sigma
+	\subseteq T_{\lang{L}}{\struct{A}}$. En d'autres termes, $\struct{A}$ est un
+	modèle de $\Sigma$ si tout énoncé de $\Sigma$ est vrai dans $\struct{A}$.
+\end{definition}
+
+Nous allons maintenant définir la consistance sémantique.
+
+\begin{definition} [Sémantiquement consistante]
+	Soit $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	On dit que $\theory{T}$ est \textbf{(sémantiquement) consistante} si
+	$\theory{T}$ possède un modèle.
+\end{definition}
+
+\begin{definition} [Finiment (sémantiquement) consistante]
+	Soit $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	On dit que $\theory{T}$ est \textbf{finiment (sémantiquement) consistante} si
+	tout sous-ensemble fini $\Sigma$ de $\theory{T}$ possède un modèle.
+\end{definition}
+
+\subsection{Théorème de Godel et théorème de compacité}
+
+\begin{theorem} [Théorème de Godel]
+	\label{theorem:godel}
+	Soit $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	Soit $\phi$ un $\lang{L}$-énoncé.
+
+	Si pour tout modèle $\struct{A}$ de $\theory{T}$, $\struct{A} \models \phi$,
+	alors $\theory{T} \satisfies \phi$.
+\end{theorem}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\begin{theorem}
+	Soit $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	Les assertions suivantes sont équivalentes.
+
+	\begin{enumerate}
+		\item $\theory{T}$ est (syntaxiquement) consistante.
+		\item $\theory{T}$ est (sémantiquement) consistante.
+	\end{enumerate}
+\end{theorem}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+A partir de maintenant, nous parlerons donc de théorie \textbf{consistante} et
+ne ferons plus la distinction entre sémantiquement consistante et syntaxiquement
+consistante.
+
+Nous travaillerons aussi bien avec la définition syntaxique que sémantique, sans
+toujours le préciser.
+
+\begin{theorem} [Théorème de compacité]
+	\label{theorem:compacite}
+	Soit $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	Alors, les assertions suivantes sont équivalentes.
+
+	\begin{enumerate}
+		\item $\theory{T}$ est finiment consistante.
+		\item $\theory{T}$ est consistante.
+	\end{enumerate}
+\end{theorem}
+\subsection{Classe de $\lang{L}$-structures}
+
+\begin{definition} [Classes des modèles d'un ensemble de $\lang{L}$-énoncés]
+	Soit $\lang{L}$ un langage.
+
+	Soit $\Sigma$ un ensemble de $\lang{L}$-énoncés.
+
+	On note $Mod(\Sigma)$ la classe des modèles de $\Sigma$.
+\end{definition}
+
+\begin{definition} [Classe élémentaire]
+	Soit $\lang{L}$ un langage et soit $\mathcal{C}$ une classe de $\lang{L}$-structures.
+
+	On dit que \textbf{$\mathcal{C}$ est une classe élémentaire} s'il existe un
+	ensemble $\Sigma$ de $\lang{L}$-énoncés tel que $Mod(\Sigma) = \mathcal{C}$.
+\end{definition}
+
+\begin{proposition}
+	Soit $\lang{L}$ un langage et soit $\mathcal{C}$ une classe élémentaire de
+	$\lang{L}$-structures.
+
+	Alors, les assertions suivantes sont équivalentes.
+
+	\begin{enumerate}
+		\item $\mathcal{C}$ est finiment axiomatisable.
+		\item $\mathcal{C}$ et $\mathcal{C}^{c}$ sont des classes élémentaires.
+	\end{enumerate}
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\subsection{Plongements et isomorphismes}
+
+Comme nous le faisons dans chaque struture que nous posons que les ensembles en
+algèbre, nous allons définir les morphismes entre les $\lang{L}$-structures.
+
+Intuitivement (et étymologiquement), un morphisme entre deux
+$\lang{L}$-structures doit transporter les caractéristiques d'une
+$\lang{L}$-structure à l'autre.
+
+En théorie des modèles, nous travaillons sur les $\lang{L}$-énoncés que les
+$\lang{L}$-structures satisfont. Nous sommes alors menés naturellement à définir
+les morphismes de la manière suivante.
+
+\begin{definition} [$\lang{L}$-morphisme et $\lang{L}$-plongement entre $\lang{L}$-structures]
+	Soit $\lang{L}$ un langage et soient $\struct{A}$ et $\struct{B}$ deux
+	$\lang{L}$-structures.
+
+	Soit $\GSfunction{f}{A}{B}$ une fonction.
+
+	On dit que $f$ est \textbf{un $\lang{L}$-morphisme de $\struct{A}$ dans $\struct{B}$}
+	si les conditions suivantes sont respectées.
+
+	\begin{enumerate}
+		\item Pour tout symbole de constante $c$ du langage $\lang{L}$,
+			\begin{equation}
+				f(c^{\struct{A}}) = c_{\struct{B}}
+			\end{equation}
+		\item Pour toute fonction $F$ $n$-aire du langage $\lang{L}$, et tout
+		$n$-uplet $a_{1}, \dots, a_{n} \in A$,
+			\begin{equation}
+				f(F^{\struct{A}}(a_{1}, \dots, a_{n})) =
+				F^{\struct{B}}(f(a_{1}), \dots, f(a_{n}))
+			\end{equation}
+		\item Pour tout symbole de relation $R$ $n$-aire, pour tout $a_{1},
+			\dots, a_{n} \in A$,
+			\begin{equation}
+				\struct{A} \models R^{\struct{A}}(a_{1}, \dots, a_{n})
+				\Leftrightarrow \struct{B} \models R^{\struct{B}}(f(a_{1}),
+				\dots, f(a_{n}))
+			\end{equation}
+	\end{enumerate}
+
+	On dit que $f$ est \textbf{un $\lang{L}$-plongement} si $f$ est un
+	$\lang{L}$-morphisme et de plus injectif.
+
+	Si $f$ est de plus bijectif, on dit que $f$ est \textbf{un
+		$\lang{L}$-isomorphisme}.
+\end{definition}
+
+\begin{definition} [$\lang{L}$-plongement élémentaire]
+	Soit $\lang{L}$ un langage et deux $\lang{L}$-structures $\struct{A}$ et
+	$\struct{B}$.
+
+	Soit $\GSfunction{f}{A}{B}$ un $\lang{L}$-plongement.
+
+	On dit que $f$ est \textbf{un $\lang{L}$-plongement élémentaire} si pour
+	toute $\lang{L}$-formule $\phi(\vec{x})$ et pour tout $a_{1}, \dots, a_{n}
+	\in A$,
+	\begin{equation}
+		\struct{A} \models \phi(a_{1}, \dots, a_{n}) \Leftrightarrow \struct{B} \models
+		\phi(f(a_{1}), \dots, f(a_{n}))
+	\end{equation}
+\end{definition}
+
+\subsection{Relations entre les $\lang{L}$-structures}
 
 \begin{definition} [$\kappa$-catégorique]
 	Soient $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie consistante.
@@ -49,15 +509,11 @@
 	La théorie des $\rational$ espaces vectoriels est $\aleph_{1}$-catégorique.
 \end{proposition}
 
+\ifdefined\outputproof
 \begin{proof}
 
 \end{proof}
-
-\begin{definition} [Groupe divisible]
-	Soit $G$ un groupe abélien. On dit que $G$ est \textbf{divisible} si pour
-	tout $n \in \naturel_{0}$, pour tout $g \in G$, il existe $h \in G$ tel que
-	$g = \underbrace{h \cdots h}_{n \text{ fois}}$.
-\end{definition}
+\fi
 
 La théorie des groupes abéliens divisibles comportent une liste dénombrable
 d'axiomes (au premier ordre). En effet, il faut citer, pour chaque $n$, l'axiome
@@ -74,9 +530,37 @@ cité dans la définition.
 	$\rational$-espace vectoriel.
 \end{proposition}
 
+\ifdefined\outputproof
 \begin{proof}
 
 \end{proof}
+\fi
+
+\begin{definition} [Elémentairement équivalents]
+	Soit $\lang{L}$ un langage et soient $\struct{A}$, $\struct{B}$ deux
+	$\lang{L}$-structures.
+
+	On dit que $\struct{A}$ et $\struct{B}$ sont \textbf{élémentairement
+	équivalents} et on note $\struct{A} \equiv_{\lang{L}} \struct{B}$, si
+	\begin{equation}
+		Th_{\lang{L}}(\struct{A}) = Th_{\lang{L}}(\struct{B})
+	\end{equation}
+	c'est-à-dire que si nous prenons un $\lang{L}$-énoncé $\phi$, il est vrai
+	dans $\struct{A}$ ssi il est vrai dans $\struct{B}$.
+\end{definition}
+
+\begin{definition} [Sous-structure élémentaire]
+	Soit $\lang{L}$ un langage et soient $\struct{A}$, $\struct{B}$ deux
+	$\lang{L}$-structures tel que $\struct{A} \substructure \struct{B}$.
+
+	On dit que $\struct{A}$ est \textbf{une sous-structure élémentaire} de
+	$\struct{B}$ si pour toute $\lang{L}$-formule $\phi(x_{1}, \dots, x_{n})$,
+	pour tout $a_{1}, \dots, a_{n} \in A$,
+	\begin{equation}
+		\struct{A} \models \phi(a_{1}, \dots, a_{n}) \Leftrightarrow \struct{B}
+		\models \phi(a_{1}, \dots, a_{n})
+	\end{equation}
+\end{definition}
 
 \begin{definition} [Modèle-complète]
 	Soit $\lang{L}$ un langage, et $\theory{T}$ une $\lang{L}$-théorie.
@@ -86,21 +570,31 @@ cité dans la définition.
 	\elemSubstructure \struct{B}$.
 \end{definition}
 
-\begin{definition} [Existentiellement clos]
-	Soit $\lang{L}$ un langage.
+\begin{remarque}
+	Il n'y a aucun lien \textbf{direct} entre 'être complète' et 'être
+	modèle-complète', c'est-à-dire qu'il existe des théories qui sont complètes
+	et pas modèle-complète, et d'autres qui sont modèle-complète mais pas complètes.
+\end{remarque}
 
-	Soient $\struct{A}$, $\struct{B}$ deux $\lang{L}$-structures tel que
-	$\struct{A} \substructure \struct{B}$.
+\begin{definition} [Diagramme et diagramme élémentaire d'une $\lang{L}$-structure
+	$\struct{A}$]
+	Soit $\lang{L}$ un langage et soit $\struct{A}$ une $\lang{L}$-structure.
 
-	On dit que \textbf{$\struct{A}$ est existentiellement clos dans
-	$\struct{B}$}, noté $\struct{A} \existentiallyClosed \struct{B}$, si toute
-	formule existentielle à paramètres dans $\struct{A}$ est vraie dans
-	$\struct{A}$ et dans $\struct{B}$.
+	Soit $\lang{L}_{A}:= \lang{L} \union \GSsetDef{c_{a}}{a \in A}$ où $c_{a}$
+	est un symbole de constante n'apparaissant pas dans $\lang{L}$.
+
+	On note $Diag(\struct{A})$ \textbf{le diagramme (sans quantificateurs) de
+	$\struct{A}$ dans $\lang{L}_{A}$} c'est-à-dire l'ensemble de tous les
+	$\lang{L}_{A}$-énoncés sans quantificateurs vrais dans $\struct{A}$.
+
+	On note $Diag_{el}(\struct{A})$ \textbf{le diagramme élémentaire de
+	$\struct{A}$} c'est-à-dire l'ensemble de tous les $\lang{L}_{A}$-énoncés
+	vrais dans $\struct{A}$.
 \end{definition}
 
-\section{Théorèmes de Lowenheim Skolem}
+\chapter{Théorèmes de Lowenheim Skolem}
 
-\subsection{Enoncés et preuves}
+\section{Enoncés et preuves}
 
 \begin{theorem} [Test de Tarski-Vaught]
 	\label{theorem:tarski_vaught}
@@ -111,19 +605,26 @@ cité dans la définition.
 
 	Alors, les assertions suivantes sont équivalentes.
 
-	\begin{itemize}
+	\begin{enumerate}
 		\item $\struct{A} \elemSubstructure \struct{B}$
 		\item Pour toute $\lang{L}$-formule $\phi(x, \vec{y})$ où $\vec{y} =
 			(y_{1}, \dots, y_{m}) $, pour tout uple $\vec{a} = (a_{1}, \dots,
-			a_{m}) \in A^{m}$, si $\struct{B} \models \exists x \, \phi(x,
-			\vec{a})$, alors $\exists b \in A, \struct{A} \models \phi(b,
-			\vec{a})$.
-	\end{itemize}
+			a_{m}) \in A^{m}$, si 
+			\begin{equation}
+				\struct{B} \models \exists x \, \phi(x, \vec{a})
+			\end{equation}
+			alors
+			\begin{equation}
+				\exists b \in A, \struct{A} \models \phi(b, \vec{a})
+			\end{equation}
+	\end{enumerate}
 \end{theorem}
 
+\ifdefined\outputproof
 \begin{proof}
 
 \end{proof}
+\fi
 
 Donnons maintenant le théorème de Lowenheim Skolem (descendant).
 
@@ -138,15 +639,17 @@ Donnons maintenant le théorème de Lowenheim Skolem (descendant).
 	\label{theorem:lowenheim_skolem_descendant}
 \end{theorem}
 
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
 Ce théorème est très important, et assez impressionnant. En effet, il signifie
 que si on prend une quelconque structure sur un langage donné, nous pouvons
 trouver une structure au plus dénombrable qui répond aux mêmes formules que
 notre structure de départ. C'est-à-dire que nous pouvons trouver des structures
 aussi petites qu'on veut répondant à la théorie de notre structure initiale.
-
-\begin{proof}
-
-\end{proof}
 
 Nous obtenons également une version montante, dans le sens que nous pouvons
 aussi trouver des structures aussi grandes qu'on souhaite qui garde la même théorie.
@@ -162,12 +665,22 @@ aussi trouver des structures aussi grandes qu'on souhaite qui garde la même th�
 	\label{theorem:lowenheim_skolem_montant}
 \end{theorem}
 
+\ifdefined\outputproof
 \begin{proof}
 
 \end{proof}
+\fi
 
+\section{Applications}
 
-\subsection{Applications}
+\begin{exemple}
+	Soit $\lang{L} = \GSset{+, -, ., 0, 1}$ le langage des anneaux.
+	Soit $\struct{A} = (\complex, +, -, ., 0, 1)$ l'interprétation usuelle de
+	$\complex$ comme un anneau.
+
+	Le théorème de Lowenheim-Skolem nous dit alors qu'il existe un sous-corps de
+	$\complex$ dénombrable algébriquement clos.
+\end{exemple}
 
 Nous obtenons directement un corollaire des théorèmes de Lowenheim-Skolem.
 
@@ -177,15 +690,50 @@ Nous obtenons directement un corollaire des théorèmes de Lowenheim-Skolem.
 
 	Alors les assertions suivantes sont équivalentes.
 
-	\begin{itemize}
-		\item $\theory{T}$ est complète.
-		\item Tous les modèles de $\theory{T}$ sont élémentairement équivalents.
-	\end{itemize}
+	\begin{enumerate}
+		\item \label{statement:complete} $\theory{T}$ est complète.
+		\item \label{statement:all_model_elem_equiv} Tous les modèles de $\theory{T}$ sont élémentairement équivalents.
+	\end{enumerate}
 \end{corollary}
 
+\ifdefined\outputproof
 \begin{proof}
+	$(\ref{statement:complete}) \implies
+	(\ref{statement:all_model_elem_equiv})$ :
+	Supposons que $\theory{T}$ est complète. Soient $\struct{A}$ et $\struct{B}$
+	deux modèles de $\theory{T}$.
+	Nous devons alors montrer que pour tout $\lang{L}$-énoncé $\phi$,
+	\begin{equation}
+		\struct{A} \models \phi \Leftrightarrow \struct{B} \models \phi
+	\end{equation}
 
+	Supposons que $\struct{A} \models \phi$. En particulier, nous avons que
+	$\theory{T} \satisfies \phi$.
+	Si $\struct{B} \not\models \phi$, alors $\theory{T} \satisfies \neg
+	\phi$. Or $\theory{T}$ est complète.
+
+	Par un même raisonnement, nous obtenons l'autre application.
+
+	$(\ref{statement:all_model_elem_equiv}) \implies (\ref{statement:complete})$
+	:
+	Supposons que tous les modèles de $\theory{T}$ soient élémentairement
+	équivalents, et prenons un $\lang{L}$-énoncé $\phi$. Soit $\struct{A}$ un
+	modèle de $\theory{T}$.
+
+	Si $\struct{A} \models \phi$, alors pour tout modèle $\struct{B}$ de $\theory{T}$, on
+	a $\struct{B} \models \phi$. D'où, $\theory{T} \satisfies \phi$.
+
+	Par un même raisonnement, si $\struct{A} \models \neg \phi$, alors
+	$\theory{T} \satisfies \phi$.
+
+	Donc, dans tous les cas, $Conseq(\theory{T}) \inter \GSset{\sigma, \neg \sigma}$ est
+	un singleton. D'où $\theory{T}$ complète.
 \end{proof}
+\fi
+
+Remarquons que le corollaire \ref{lemma:complete_equiv_elementaire_equivalentes}
+fait le lien entre l'aspect purement syntaxique de la définition d'une théorie
+complète, et l'aspect purement sémantique des modèles de $\theory{T}$.
 
 \begin{exemple}
 	La théorie des ordres denses n'est pas complète car on peut construire la
@@ -206,23 +754,60 @@ Nous obtenons directement un corollaire des théorèmes de Lowenheim-Skolem.
 	Alors $\theory{T}$ est complète.
 \end{theorem}
 
+\ifdefined\outputproof
 \begin{proof}
+	Par le corollaire \ref{lemma:complete_equiv_elementaire_equivalentes} qu'on
+	a démontré précédemment, il est nécessaire et suffisant de montrer que tous
+	les modèles sont élémentairement équivalents.
 
+	Prenons deux modèles $\struct{A}$ et $\struct{B}$.
+
+	Par les théorèmes de Lowenheim-Skolem, il existe un modèle
+	$\struct{\overset{\sim}{A}}$ de cardinalité $\kappa$ tel que $\struct{A}$ est
+	isomorphe à $\struct{\overset{\sim}{A}}$. En particulier, $\struct{A}$ est
+	élémentairement équivalent à $\struct{\overset{\sim}{A}}$.
+
+	De même, il existe un modèle $\struct{\overset{\sim}{B}}$ de cardinalité
+	$\kappa$ élémentairement équivalent à $\struct{B}$.
+
+	Comme la théorie $\theory{T}$ est $\kappa$-catégorique,
+	$\struct{\overset{\sim}{A}}$ et $\struct{\overset{\sim}{B}}$ sont
+	élémentairement équivalents.
+
+	A fortiori, $\struct{A}$ et $\struct{B}$ sont élémentairement équivalents.
 \end{proof}
+\fi
 
 Remarquons que la condition que $\theory{T}$ ne possède que des modèles infinis
-est essentiels. En effet, s'il possède un modèle fini, de cardinalité $n$ par exemple, alors la formule:
+est essentielle. En effet, s'il possède un modèle fini, de cardinalité $n$ par exemple, alors la formule:
 
 \begin{equation}
-	\phi(x) := \exists a_{1}, \cdots, \exists a_{n} x = a_{b}
+	\phi(x) := \exists a_{1}, \cdots, \exists a_{n} \, \, x = a_{b}
 \end{equation}
 
 est vraie dans le modèle fini, mais non dans un modèle infini. Un exemple est
 la théorie des groupes abéliens dont tous les éléments sont d'ordre $2$, qui est
 laissé en exercice.
 
+\begin{theorem} [Théorème de Morley]
+	Soit $\lang{L}$ un langage dénombrable.
 
-\section{Elimination des quantificateurs}
+	Soit $\theory{T}$ une $\lang{L}$-théorie consistante avec des modèles infinis.
+
+	Si $\theory{T}$ est $\aleph_{1}$-catégorique, alors, pour tout $\kappa$
+	inifini non dénombrable, $\theory{T}$ est $\kappa$-catégorique.
+\end{theorem}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\chapter{Elimination des quantificateurs}
+
+Nous souhaitons donner une méthode pour déterminer si une théorie est complète
+ou non. Nous sommes alors mené au concept d'élimination des quantificateurs.
 
 \begin{definition}
 	\label{definition:elimination_quantificateurs}
@@ -233,12 +818,12 @@ laissé en exercice.
 	$\lang{L}$-formule sans quantificateurs $\theta(\vec{x})$ tel que
 
 	\begin{equation}
-		T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \equiv \theta(\vec{x}))]
+		T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \Leftrightarrow \theta(\vec{x}))]
 	\end{equation}
 \end{definition}
 
 \begin{exemple}
-	\begin{itemize}
+	\begin{enumerate}
 		\item La théorie des corps algébriquement clos ($ACF$) possède l'élimination des
 	quantificateurs.
 		\item Sur le langage $\lang{L} = (+, -, ., <, 0, 1)$, la théorie $T :=
@@ -247,7 +832,7 @@ laissé en exercice.
 		\item Sur le langage $\lang{L} = (+, -, ., 0, 1)$, la théorie $T :=
 			Th_{\lang{L}}(\real, +, -, ., 0, 1)$ (interprétation usuelle) n'a pas
 			l'élimination des quantificateurs.
-	\end{itemize}
+	\end{enumerate}
 \end{exemple}
 
 Par le dernier exemple, nous remarquons que le langage a de l'importance.
@@ -257,9 +842,9 @@ une définition purement syntaxique: il n'y a aucune structure qui apparaît.
 On pourrait se demander s'il est possible d'obtenir un critère équivalent
 purement sémantique.
 
-Nous sommes alors mené au théorème suivant.
+Nous sommes alors menés au théorème suivant.
 
-\begin{theorem}
+\begin{theorem} [Critère d'élimination des quantificateurs formules par formules]
 	\label{theorem:critere_eq_formule_par_formule}
 	Soit $\lang{L}$ un langage comportant au moins un symbole de constante, et
 	soit $\theory{T}$ une $\lang{L}$-théorie consistante.
@@ -268,35 +853,79 @@ Nous sommes alors mené au théorème suivant.
 
 	Alors les assertions suivantes sont équivalentes.
 
-	\begin{itemize}
-		\item Il existe une formule sans quantificateurs $\theta(\vec{x})$ tel
+	\begin{enumerate}
+		\item \label{statement:critere_eq_syntaxique} Il existe une formule sans quantificateurs $\theta(\vec{x})$ tel
 			que
 			\begin{equation}
-				T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \equiv
+				T \satisfies [\forall \vec{x}, (\phi(\vec{x}) \Leftrightarrow
 				\theta(\vec{x}))]
 			\end{equation}
-		\item Pour tous modèles $\struct{A}$, $\struct{B}$ de $\theory{T}$,
+		\item \label{statement:critere_eq_semantique} Pour tous modèles $\struct{A}$, $\struct{B}$ de $\theory{T}$,
 			toutes sous-structures $\struct{C}$ de $\struct{A}$ et $\struct{B}$,
 			et tout $\vec{a} \subseteq C$, on a
 			\begin{equation}
-				\struct{A} \models \phi(\vec{a}) \equiv \struct{B} \models
+				\struct{A} \models \phi(\vec{a}) \Leftrightarrow \struct{B} \models
 				\phi(\vec{a})
 			\end{equation}
-	\end{itemize}
+	\end{enumerate}
 \end{theorem}
 
+\ifdefined\outputproof
 \begin{proof}
+	$(\ref{statement:critere_eq_syntaxique} \implies
+	\ref{statement:critere_eq_semantique})$
 
+	Soient $\struct{A}$ et $\struct{B}$ deux modèles de $\theory{T}$ et soit
+	$\struct{C}$ une $\lang{L}$-structure tel que $\struct{C} \substructure
+	\struct{A}$ et $\struct{C} \substructure \struct{B}$.
+
+	Prenons une $\lang{L}$-formule $\phi(x_{1}, \dots, x_{n})$ et un $n$-uplet
+	$\vec{a} = (a_{1}, \dots, a_{n}) \in C^{n}$.
+	Nous devons montrer
+	\begin{equation}
+		\struct{A} \models \phi(\vec{a}) \Leftrightarrow \struct{B} \models
+		\phi(\vec{a})
+	\end{equation}
+
+	Comme $\theory{T}$ a l'élimination des quantificateurs, il existe une
+	formule $\theta(x_{1}, \dots, x_{n})$ tel que
+	\begin{equation}
+		\theory{T} \satisfies [\forall \vec{x} (\theta(\vec{x}) \Leftrightarrow
+		\phi(\vec{x}))]
+	\end{equation}
+
+	Si $\struct{A} \models \phi(\vec{a})$, alors $\struct{A} \models
+	\theta(\vec{a})$.
+
+	Comme $\theta$ est sans quantificateur et que $\vec{a} \in C^{n}$, on a
+	$\struct{C} \models \theta(\vec{a})$.
+
+	En particulier, comme $\struct{C} \substructure \struct{B}$, on a
+	$\struct{B} \models \theta(\vec{a})$.
+
+	En se souvenant que
+	\begin{equation}
+		\theory{T} \satisfies [\forall \vec{x} (\theta(\vec{x}) \Leftrightarrow
+		\phi(\vec{x}))]
+	\end{equation}
+	on a $\struct{B} \models \phi(\vec{a})$.
+
+	$(\ref{statement:critere_eq_semantique} \implies
+	(\ref{statement:critere_eq_syntaxique})$.
 \end{proof}
+\fi
 
 \begin{proposition}
 	Soit $\lang{L}$ un langage, et soit $\theory{T}$ une $\lang{L}$-théorie
-	modèle-complète. Alors $\theory{T}$ a l'élimination des quantificateurs.
+	qui a l'élimination des quantificateurs. Alors $\theory{T}$ est
+	modèle-complète.
 \end{proposition}
 
+\ifdefined\outputproof
 \begin{proof}
 
 \end{proof}
+\fi
 
 \begin{remarque}
 	La réciproque n'est pas vraie. En effet, la théorie $Th_{\lang{L}}(\real, +,
@@ -304,29 +933,658 @@ Nous sommes alors mené au théorème suivant.
 	quantificateurs.
 \end{remarque}
 
-\section{Ensemble définissable}
+\begin{exemple}
+	Soit $ACF_{0}$ la théorie des corps algébriquement clos de caractéristique
+	nulle sur le langage des anneaux $\lang{L}_{an} = \GSset{+, -, ., 0, 1}$.
 
+	$ACF_{0}$ a l'élimination des quantificateurs.
+\end{exemple}
 
-\section{Exercices}
+Nous allons donner une conséquence du critère
+\ref{theorem:critere_eq_formule_par_formule}.
+
+\begin{proposition}
+	Soit $\lang{L} = (+, -, 0)$ un langage et $\theory{T}_{g, a, d, st}$ la
+	$\lang{L}$-théorie des groupes abéliens divisibles sans torsion.
+
+	Nous avons que $\theory{T}_{g, a, d, st}$ a l'élimination des
+	quantificateurs.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+	Nous devons montrer que pour toute $\lang{L}$-formule $\phi(\vec{x})$, il existe une
+	formule sans quantificateurs $\theta(\vec{x})$ tel que
+	\begin{equation}
+		\theory{T}_{g, a, d, st} \satisfies [\forall \vec{x} \, (\phi(\vec{x})
+		\Leftrightarrow \theta(\vec{x}))]
+	\end{equation}
+
+	Soit $\phi(\vec{x})$ une $\lang{L}$-formule.
+	Raisonnons par récurrence la complexité des formules.
+
+	- Si $\phi$ est de complexité $0$, nous ne devons rien montrer: nous pouvons
+	prendre $\theta = \phi$.
+
+	Suppsons que nous avons montré pour les formules de complexité $n$, et
+	montrons que ça reste vrai pour les formules de complexité $n + 1$.
+
+	- Si $\phi$ est de complexité $n + 1$, alors, sans perte de généralité, nous
+	pouvons nous restreindre au cas où $\phi(\vec{x}) = \exists y \, \theta(y,
+	\vec{x})$ avec $\theta$ sans quantificateurs.
+	En effet, si $\theta$ n'est pas quantificateurs, alors $\phi(\vec{x})$ est
+	équivalentes à $\exists y \, \theta(y, \vec{x})$ où $\theta$ est de
+	complexité $n$ et par hypothèse de récurrence, $\theta(y, \vec{x})$ est
+	équivalentes à une formule sans quantificateurs.
+
+	% TODO: à finir.
+\end{proof}
+\fi
+\chapter{Ensembles définissables}
+
+\begin{definition} [Ensemble définissable]
+	Soit $\lang{L}$ un langage, et soit $\struct{M}$ une $\lang{L}$-structure.
+
+	Soit $A$ un sous ensemble de $M$.
+
+	On dit que \textbf{$A$ est un ensemble définissable dans $\struct{M}$} s'il
+	existe une $\lang{L}$-formule $\phi(x)$ tel que
+	\begin{equation}
+		A = \GSsetDef{m \in M}{\struct{M} \models \phi(m)} := \phi(M)
+	\end{equation}
+
+	De manière générale, un sous-ensemble $A$ de $M^{n}$ est dit
+	\textbf{définissable d'ordre $n$ dans $\struct{M}$} s'il existe une
+	$\lang{L}$-formule $\phi(\vec{x}) = \phi(x_{1}, \dots, x_{n})$ tel que
+
+	\begin{equation}
+		A = \phi(M) := \GSsetDef{\vec{m} = (m_{1}, \dots, m_{n})}{\struct{M}
+		\models \phi(\vec{m})}
+	\end{equation}
+
+	L'ensemble des ensembles définissables d'ordre $n$ est noté
+	$\definissableSet[n]{\struct{M}}$.
+\end{definition}
+
+\begin{remarque}
+	\begin{enumerate}
+		\item Un ensemble définissable dans $\struct{M}$ est un ensemble définissable
+	d'ordre $1$.
+		\item L'ensemble des ensembles définissables dans $\struct{M}$ est noté
+			$\definissableSet{\struct{M}}$.
+		\item La définition d'ensemble définissable est purement syntaxique.
+	\end{enumerate}
+\end{remarque}
+
+\begin{definition}
+	Soit $\lang{L}$ un langage, et soit $\struct{M}$ une $\lang{L}$-structure.
+
+	Soit $A$ un sous ensemble de $M^{n}$.
+
+	On dit que \textbf{$A$ est définissable d'ordre $n$ avec paramètres dans
+		$\struct{M}$} s'il existe une $\lang{L}$-formule $\phi(x_{1}, \cdots,
+		x_{n}, y_{1}, \cdots, y_{k})$ et des constantes $\vec{c} = (c_{1},
+		\cdots, c_{k}) \in M^{k}$ tel que
+	\begin{equation}
+		A = \phi(M, \vec{c}) := \GSsetDef{\vec{m} \in M^{n}}{\struct{M} \models
+		\phi(\vec{m}, \vec{c})}
+	\end{equation}
+\end{definition}
+
+\begin{remarque}
+	Tout ensemble définissable d'ordre $n$ est un ensemble définissable d'ordre
+	$n$ avec paramètres.
+\end{remarque}
+
+\begin{exemple}
+	Soit $\lang{L}_{an, <} = (+, -, ., 0, 1, <)$ et soit la $\lang{L}_{an, <}$-structure
+	$(\real, +, -, ., 0, 1, <)$ avec l'interprétation usuelle.
+
+	Chaque intervalle $]c_{1}, c_{2}[$ est définissable d'ordre $1$ pour chaque
+	$c_{1}, c_{2} \in \real$.
+
+	Mais, $]2, 3[$ n'est pas définissable sans paramètre.
+\end{exemple}
 
 \begin{exercice}
-	La théorie des ordres denses sans extrémités est $\aleph_{0}$-catégorique.
+	Tout ensemble fini de $\real$ est définissable avec paramètres dans le
+	langage $\lang{L}_{an} =
+	(+, -, ., 0, 1)$.
+
+	De manière plus générale, pour tout langage $\lang{L}$ et pour toute
+	$\lang{L}$-structures, tout ensemble fini est définissable avec paramètres.
 \end{exercice}
 
-\begin{exercice}
-	La théorie des groupes abéliens dont tous les éléments sont d'ordre $2$
-	n'est pas complète mais est $\aleph_{0}$ catégorique.
-\end{exercice}
+\begin{answer}
+	Montrons le cas général directement.
+
+	Soit $\struct{A}$ une $\lang{L}$-structure et $B \subseteq A$ de cardinalité
+	finie $n$. Notons les éléments de $B$ par $a_{1}, \dots, a_{n}$.
+
+	Alors, on a clairement
+	\begin{equation}
+		B = \phi(A, a_{1}, \dots, a_{n})
+	\end{equation}
+	où
+	\begin{equation}
+		\phi(x, a_{1}, \dots, a_{n}) \equiv (x = a_{1} \vee \dots \vee x =
+		a_{n})
+	\end{equation}
+
+	car
+	\begin{equation}
+		\phi(A, a_{1}, \dots, a_{n}) := \GSsetDef{x \in A}{x = a_{1} \vee \dots
+		\vee x = a_{n}}
+	\end{equation}
+\end{answer}
+
+\begin{proposition}
+	Soit $\lang{L}_{ann, <} = (+, -, ., <, 0, 1)$ le langage des anneaux
+	ordonnés et soit $(\real, +, -, ., <, 0, 1)$ la $\lang{L}_{ann,
+	<}$-structure avec comme ensemble de base $\real$, et où l'interprétation
+	est celle utilisée usuellement.
+
+	Alors, le graphe de la relation $<$, c'est-à-dire l'ensemble
+	\begin{equation}
+		\GSsetDef{(a, b) \in \real^{2}}{a < b}
+	\end{equation}
+	est un ensemble définissable à deux paramètres.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+	On a
+	\begin{align}
+		\GSsetDef{(a, b) \in \real^{2}}{a < b} & = \GSsetDef{(a, b) \in
+			\real^{2}}{b - a > 0} \\
+			& = \GSsetDef{(a, b) \in \real^{2}}{\exists y \, (y^{2} = b - a)
+		\wedge \neg(b = a)}
+	\end{align}
+	On peut alors définir la formule
+	\begin{equation}
+		\phi(a_{1}, a_{2}) \equiv \exists y \, (y^{2} = a_{2} - a_{1}) \wedge
+		\neg (a_{1} = a_{2})
+	\end{equation}
+	ce qui nous donne bien ce qu'on veut.
+\end{proof}
+\fi
+
+\chapter{Existentiellement clos}
+
+Prenons un langage $\lang{L}$ et deux $\lang{L}$-structures $\struct{A}$ et
+$\struct{B}$ tel que $\struct{A} \substructure \struct{B}$.
+
+Nous avons donné la notion de sous-structure élémentaire. Cette définition
+était assez forte car celle-ci demandait que les théories de $\struct{A}$ et
+$\struct{B}$ soient les mêmes.
+
+En terme de théorie, nous avons défini la notion de \textit{théorie
+modèle-complète} qui demandait que chaque sous-structure soit élémentaire,
+c'est-à-dire que chaque sous-structure répond à la même théorie que les
+structures qui la contiennent.
+
+Est-il possible de restreindre le nombre de formules à vérifier pour tester si
+une théorie est modèle-complète ?
+
+Concentrons-nous pour l'instant sur les formules existentielles, et définissons
+un nouveau type de sous-structure, à priori moins forte que la sous-structure élémentaire.
+
+\begin{definition} [Existentiellement clos]
+	Soit $\lang{L}$ un langage.
+
+	Soient $\struct{A}$, $\struct{B}$ deux $\lang{L}$-structures tel que
+	$\struct{A} \substructure \struct{B}$.
+
+	On dit que \textbf{$\struct{A}$ est existentiellement clos dans
+	$\struct{B}$}, noté $\struct{A} \existentiallyClosed \struct{B}$, si toute
+	formule existentielle à paramètres dans $\struct{A}$ est vraie dans
+	$\struct{A}$ et dans $\struct{B}$.
+\end{definition}
+
+Donnons un exemple illustré à travers une proposition.
+
+\begin{proposition}
+	Soit $ACF_{0}$ la théorie des corps algébriquement clos de caractéristique nulle.
+
+	Soit $\overline{\rational}$ une cloture algébrique de $\rational$ et soit
+	$\struct{K} \models ACF_{0}$ où tel que $\overline{\rational}
+	\subseteq K$.
+
+	Alors $\overline{\rational} \existentiallyClosed \struct{K}$.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\begin{theorem}
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$ théorie consistante.
+
+	Alors les assertions suivantes sont équivalentes.
+
+	\begin{enumerate}
+		\item \label{statement:modele_complete} $\theory{T}$ est modèle-complète.
+		\item \label{statement:existentiallyClosed} Pour tous modèles $\struct{A}$, $\struct{B}$ de $\theory{T}$ tel
+			que $\struct{A} \substructure \struct{B}$, $\struct{A}
+			\existentiallyClosed \struct{B}$.
+		\item \label{statement:equiv_existentielle} Toute $\lang{L}$ formule est équivalente à une formule existentielle.
+		\item \label{statement:equiv_universelle} Toute $\lang{L}$ formule est équivalente à une formule
+			universelle.
+	\end{enumerate}
+\end{theorem}
+
+\ifdefined\outputproof
+\begin{proof}
+	$(\ref{statement:equiv_existentielle}) \Leftrightarrow
+	(\ref{statement:equiv_universelle})$ Evident: il suffit de prendre la
+	négation de la $\lang{L}$-formule. Cette équivalence est tout le temps vraie.
+
+	$(\ref{statement:modele_complete}) \implies
+	(\ref{statement:existentiallyClosed})$ Immédiat car toute sous-structure est
+	élémentairement équivalente. Donc, toutes les $\lang{L}$-formules sont
+	satisfaites dans $\struct{B}$, et donc en particulier les $\lang{L}$-formules existentielles.
+
+	$(\ref{statement:equiv_existentielle} \implies
+	(\ref{statement:modele_complete})$
+	Soient $\struct{A}$ et $\struct{B}$
+	deux $\lang{L}$-structures tel que $\struct{A} \substructure \struct{B}$. Il
+	faut montrer que pour toute $\lang{L}$-formule $\phi(\vec{x})$ et pour tous
+	$a_{1}, \dots, a_{n} \in A$,
+	\begin{equation}
+		\struct{A} \models \phi(\vec{a}) \Leftrightarrow \struct{B}
+		\models \phi(\vec{a})
+	\end{equation}
+	On a toujours que $\struct{A} \models \phi(\vec{a}) \implies \struct{B}
+	\models \phi(\vec{a})$ car $\struct{A} \substructure \struct{B}$.
+
+	Montrons que $\struct{B} \models \phi(\vec{a}) \implies \struct{A} \models
+	\phi(\vec{a})$.
+
+	On a, par hypothèse, qu'il existe une $\lang{L}$-formule existentielle
+	$\psi(\vec{x})$ tel que
+	\begin{equation}
+		T \satisfies [\forall \vec{x} \, (\phi(\vec{x}) \Leftrightarrow \neg
+		\psi(\vec{x}))]
+	\end{equation}
+	de telle sorte que
+	\begin{equation}
+		\struct{B} \models \phi(\vec{a}) \Leftrightarrow \struct{B} \models
+		\neg \psi(\vec{a})
+	\end{equation}
+
+	Comme $\psi(\vec{x})$ est une $\lang{L}$-formule existentielle, on a
+	$\neg \psi(\vec{x})$ qui est une $\lang{L}$-formule universelle.
+
+	En particulier, $\neg \psi(\vec{x})$ est satisfaite dans $\struct{A}$ car
+	$\psi$ est une $\lang{L}$-formule universelle, d'où sa 'vérité descend' dans
+	les sous-structures.
+
+	On a donc $\struct{A} \models \neq \psi(\vec{a})$. D'où, en particulier,
+	$\struct{A} \models \phi(\vec{a})$.
+
+	$(\ref{statement:existentiallyClosed}) \implies
+	(\ref{statement:equiv_existentielle})$.
+\end{proof}
+\fi
+
+\begin{lemma}
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$ théorie consistante.
+
+	Soit $\kappa$ un cardinal infini tel que $\cardinal{\lang{L}} \leq \kappa$.
+
+	Alors, les assertions suivantes sont équivalentes.
+
+	\begin{enumerate}
+		\item pour toute $\struct{A}$, $\struct{B}$ tel que $\struct{A}
+			\substructure \struct{B}$, $\struct{A} \existentiallyClosed
+			\struct{B}$.
+		\item pour toute $\struct{A}$, $\struct{B}$ tel que $\struct{A}
+			\substructure \struct{B}$ et $\cardinal{A} = \cardinal{B} = \kappa$, $\struct{A} \existentiallyClosed
+			\struct{B}$.
+	\end{enumerate}
+
+	En d'autres termes, pour montrer que toute sous-structure est
+	existentiellement closes, il est nécéssaire et suffisant que pour une classe
+	de même cardinalité $\kappa$, les sous-structures soient existentiellement
+	closes.
+\end{lemma}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\chapter{Modèle premier}
+
+\begin{definition}
+	Soit $\lang{L}$ un langage.
+
+	Soient $\theory{T}$ une $\lang{L}$-théorie consistante, et $\struct{A}$ un
+	modèle de $\theory{T}$.
+
+	On dit que $\struct{A}$ est \textbf{modèle premier} si pour tout modèle
+	$\struct{B}$ de $\theory{T}$, il existe un plongement élémentaire de
+	$\struct{A}$ dans $\struct{B}$.
+\end{definition}
+
+\begin{proposition}
+	Soit $\lang{L}$ un langage.
+
+	Soient $\theory{T}$ une $\lang{L}$-théorie consistante, modèle-complète et
+	possèdant un modèle premier.
+
+	Alors $\theory{T}$ est complète.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+
+	%Il suffit de montrer que tous les modèles sont élémentairement équivalents
+	%par le corollaire \ref{lemma:complete_equiv_elementaire_equivalentes} des
+	%théorèmes de Lowenheim-Skolem.
+
+	%Prenons $\struct{C}$ un modèle premier de $\theory{T}$.
+	%Soient $\struct{A}$ et $\struct{B}$ deux modèles de $\struct{T}$. Alors
+	%$\struct{C}$ est élémentairement équivalent à $\struct{A}$ et à
+	%$\struct{B}$. Par transitivité, $\struct{A}$ est élémentairement équivalent
+	%à $\struct{B}$. Donc, tous les modèles sont élémentairement équivalents.
+
+	%% FIXME: l'hypothèse que T est modèle-complète n'est pas utilisée. Pourquoi
+	%% ?
+\end{proof}
+\fi
+
+\begin{exemple}
+	\begin{enumerate}
+		\item La théorie des ordres denses avec extrémités.
+		\item ACF := la théorie des corps algébriquement clos.
+	\end{enumerate}
+\end{exemple}
+
+\begin{remarque}
+	Si $\theory{T}$ est dénombrable, consistante, et possède un modèle premier
+	$\struct{M}$, alors $\cardinal{M} \leq \aleph_{0}$ par Lowenheim-Skolem.
+\end{remarque}
+
+\begin{proposition}
+	Soit $\theory{T}$ la théorie des ordres denses sans extrémités sur le
+	langage $\lang{L} = \GSset{<}$.
+
+	Alors $(\rational, <)$ où $<$ est l'interprétation usuelle est un modèle premier.
+\end{proposition}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\chapter{Chaine de $\lang{L}$-structures}
+
+\begin{definition} [Chaine de $\lang{L}$-structures]
+	Soit $\lang{L}$ un langage.
+
+	Soient $(\struct{A}_{i})_{i \in I}$ où $(I, <)$ est un ensemble totalement
+	ordonné et pour tout $i \in I$, $\struct{A}_{i}$ est une $\lang{L}$-structure.
+
+	On dit que $(\struct{A}_{i})_{i \in I}$ est \textbf{une chaine de
+		$\lang{L}$-structure} si pour tout $i < j$, $\struct{A}_{i} \substructure
+	\struct{A}_{j}$.
+\end{definition}
+
+\begin{definition} [$\lang{L}$-structure sur l'union d'une chaine]
+	Soit $\lang{L}$ un langage.
+
+	Soit $(\struct{A}_{i})_{i \in I}$ une chaine de $\lang{L}$-structure.
+
+	On définit une $\lang{L}$-structure sur $\union_{i \in I} A_{i}$, notée
+	$\union_{i \in I} \struct{A}_{i}$, de la manière suivante.
+
+	\begin{enumerate}
+		\item Soit $c$ une constante du langage $\lang{L}$. On remarque que pour
+			tout $i, j \in I$, $c^{\struct{A}_{i}} = c^{\struct{A}_{j}}$ car
+			$\struct{A}_{i} \substructure \struct{A}_{j}$. On pose alors, sans
+			ambiguité,
+			\begin{equation}
+				c^{\union_{i \in I} \struct{A}_{i}} = c^{\struct{A}_{i}}
+			\end{equation}
+			pour un $i \in I$ quelconque.
+		\item Soit $F$ une fonction $n$-aire du langage $\lang{L}$. On remarque
+			que pour tout $a_{1}, \dots, a_{n} \in \union_{i \in I} A_{i}$, il
+			existe $i \in I$ tel que $a_{1}, \dots, a_{n} \in A_{i}$. On pose
+			alors, sans ambiguité,
+			\begin{equation}
+				F^{\union_{i \in I} \struct{A}_{i}}(a_{1}, \dots, a_{n}) =
+				F^{\struct{A}_{i}}(a_{1}, \dots, a_{n})
+			\end{equation}
+		\item Soit $R$ un symbole de relation. On pose
+			\begin{equation}
+				R^{\union_{i \in I} \struct{A}_{i}} = \union_{i \in I}
+				R^{\struct{A}_{i}}
+			\end{equation}
+	\end{enumerate}
+
+	On dit que la chaine $(\struct{A}_{i \in I})_{i \in I}$ est \textbf{une
+	chaine élémentaire} si pour tout $i < j$, $\struct{A}_{i}
+	\elemSubstructure \struct{A}_{j}$.
+\end{definition}
+
+\begin{lemma}
+	Soit $\lang{L}$ un langage.
+
+	Soit $(\struct{A}_{i})_{i \in I}$ une chaine élémentaire de $\lang{L}$-structure.
+
+	Alors, pour tout $i \in I$, $\struct{A}_{i} \elemSubstructure \union_{i \in
+	I} \struct{A}_{i}$.
+\end{lemma}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\begin{definition} [$\lang{L}$-théorie fermée par union de chaînes]
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie.
+
+	On dit que $\theory{T}$ est \textbf{fermée par union de chaines} si pour
+	toute chaine $(\struct{A}_{i})_{i \in I}$ de modèle de $\theory{T}$,
+	$\union_{i \in I} \struct{A}_{i \in I}$ est un modèle de $\theory{T}$.
+\end{definition}
+
+\begin{remarque}
+	\begin{enumerate}
+		\item Si $\theory{T}$ est une $\lang{L}$-théorie modèle-complète, toute
+			chaine de modèles de $\theory{T}$ est élémentaire.
+	\end{enumerate}
+\end{remarque}
+
+\begin{corollary}
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie modèle-complète.
+
+	Soit $(\struct{A}_{i})_{i \in I}$ une chaine de modèles de $\theory{T}$.
+
+	Alors $\union_{i \in I} \struct{A}_{i \in I}$ est un modèle de $\theory{T}$.
+
+	En d'autres termes, toute chaine de modèles d'une théorie modèle-complète est
+	fermée par union de chaines.
+\end{corollary}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+Nous avons donc une condition nécéssaire pour qu'une théorie soit fermée par
+union de chaîne.
+
+Est-ce une condition suffisante ?
+Le théorème suivant nous dit que si on enrichit nos hypothèses sur une théorie
+fermée par union de chaines, alors nous avons une théorie modèle-complète.
+
+\begin{theorem} [Théorème de Lindstrom]
+	Soit $\lang{L}$ un langage et soit $\theory{T}$ une $\lang{L}$-théorie tel
+	que
+	\begin{enumerate}
+		\item $\theory{T}$ est consistante.
+		\item $\theory{T}$ est fermée par union de chaines.
+		\item $\theory{T}$ ne possède que des modèles infinis.
+		\item il existe un cardinal $\kappa$ tel que $\theory{T}$ soit
+			$\kappa$-catégorique.
+	\end{enumerate}
+
+	Alors $\theory{T}$ est modèle-complète.
+\end{theorem}
+
+\ifdefined\outputproof
+\begin{proof}
+
+\end{proof}
+\fi
+
+\begin{exemple}
+	La théorie $\theory{T}_{ev, \rational}$ des espaces vectoriels sur le corps
+	$\rational$.
+\end{exemple}
+
+
+\chapter{Types}
+%\footnote{Ne pas confondre avec la théorie des types !}
+
+\begin{definition}
+	Soient $\lang{L}$ un langage et $\theory{T}$ une $\lang{L}$-théorie.
+
+	Soient $c_{1}, \dots, c_{n}$ $n$ nouvelles constantes et posons
+	$\lang{L}^{*} := \lang{L} \union \GSset{c_{1}, \dots, c_{n}}$ le langage
+	enrichi par ces constantes.
+
+	\textbf{Un $n$-type de $\theory{T}$} $p$ est une $\lang{L}^{*}$-théorie complète contenant
+	$T$.
+
+	On note $\typeSet{n}{T}$ l'ensemble des $n$-types de $T$.
+\end{definition}
+
+\chapter{Exercices}
 
 \begin{exercice}
+	\label{exercice:ordre_dense_sans_extremites_aleph_0_categorique}
+	Soit $\theory{T}_{o, d, s}$, la théorie des ordres denses sans extrémités.
+	\begin{enumerate}
+		\item $\theory{T}_{o, d, s}$ est consistante.
+		\item $\theory{T}_{o, d, s}$ ne contient que des modèles infinis.
+		\item $\theory{T}_{o, d, s}$ est $\aleph_{0}$-catégorique.
+	\end{enumerate}
+\end{exercice}
+
+\begin{answer}
+	\begin{enumerate}
+		\item En effet, $(\real, <)$ où $<$ est l'interprétation usuelle sur les
+			réels est un modèle de $\theory{T}_{o, d, s}$.
+		\item
+		\item
+	\end{enumerate}
+\end{answer}
+
+\begin{exercice}
+	\label{exercice:groupe_abelien_elem_ordre_2_pas_complete}
+	Soit $\theory{T}_{g, a, 2}$ la théorie des groupes abéliens dont tous les
+	éléments sont d'ordre $2$.
+
+	\begin{enumerate}
+		\item $\theory{T}_{g, a, 2}$ n'est pas complète.
+		\item Si $G \models \theory{T}_{g, a, 2}$, alors $G \models \theory{T}_{ev,
+		\mathbb{F}_{2}}$ où $\theory{T}_{ev, \mathbb{F}_{2}}$ est la théorie des
+		espaces vectoriels sur $\mathbb{F}_{2}$.
+		\item $\theory{T}_{g, a, 2}$ est $\aleph_{0}$-catégorique.
+	\end{enumerate}
+
+	En d'autres termes, tout groupe abélien dont tous les éléments sont
+	d'ordre $2$ peut être muni d'une structure d'espace vectoriel sur le corps
+	$\mathbb{F}_{2}$.
+\end{exercice}
+
+\begin{answer}
+	\begin{enumerate}
+		\item En effet,
+			$\integer/2\integer$ et $\integer/2\integer \cartprod
+			\integer/2\integer$ sont deux modèles de $\theory{T}_{g, a, 2}$ mais
+			ne sont pas élémentairement équivalents car $\integer/2\integer$ est
+			comporte $2$ éléments et $\integer/2\integer \cartprod
+			\integer/2\integer$ comporte $4$ éléments.
+		\item
+		\item Soit $\struct{A}$ un modèle de $\theory{T}_{g, a, 2}$ de
+			cardinalité $\aleph_{0}$. Considérons $\struct{A}$ comme un espace vectoriel
+			sur $\mathbb{F}_{2}$.
+
+			Alors, toute base de $\struct{A}$ est de cardinalité $\aleph_{0}$.
+
+			En particulier, si nous prenons deux modèles $\struct{A}_{1}$ et
+			$\struct{A}_{2}$ de $\theory{T}_{g, a, 2}$ de cardinalité
+			$\aleph_{0}$, alors $\struct{A}_{1}$ et $\struct{A}_{2}$ sont
+			isomorphes en tant qu'espace vectoriel car leur bases sont de même
+			cardinalité $\aleph_{0}$. Donc, $\theory{T}_{g, a, 2}$
+			est $\aleph_{0}$-catégorique.
+	\end{enumerate}
+\end{answer}
+
+\begin{exercice}
+	\label{exercice:real_ring_not_elim_quantif}
 	La théorie $Th_{\lang{L}}{(\real, +, -, ., 0, 1)}$ où $\lang{L} = (+, -, .,
 	0, 1)$ n'a pas l'élimination des quantificateurs.
 \end{exercice}
 
+\begin{answer}
+
+\end{answer}
+
 \begin{exercice}
+	\label{exercice:real_ring_modele_complete}
 	La théorie $Th_{\lang{L}}{(\real, +, -, ., 0, 1)}$ où $\lang{L} = (+, -, .,
 	0, 1)$ est modèle-complète.
 \end{exercice}
+
+\begin{answer}
+
+\end{answer}
+
+\begin{exercice}
+	\label{exercice:groupe_divisible_sans_torsion_aleph_0_model}
+	Soit $\theory{T}_{g, d, st}$ la théorie des groupes divisibles sans torsion.
+
+	Montrer qu'il existe $\aleph_{0}$ modèles de $\theory{T}_{g, d, st}$ de
+	cardinalité $\aleph_{0}$ et que $\theory{T}_{g, d, st}$ est $\aleph_{1}$
+	catégorique.
+\end{exercice}
+
+\begin{answer}
+
+\end{answer}
+
+\begin{exercice}
+	\label{exercice:real_ev_kappa_categorique}
+	Soit $\theory{T}_{ev, \real}$ la théorie des espaces vectoriels sur le corps
+	$\real$. Alors $\theory{T}_{ev, \real}$ est $2^{2^{\aleph_{0}}}$
+	catégorique.
+\end{exercice}
+
+\begin{answer}
+
+\end{answer}
+
+\begin{exercice}
+	Soit $\lang{L}_{an} = (+, -, ., 0, 1)$ le langage des anneaux et soit
+	$\lang{L}_{an, <} = (+, -, ., <, 0, 1)$ le langage des anneaux ordonnés.
+
+	Trouver des ensembles $\lang{L}_{an, <}$-définissables inclus à $\real$ qui ne sont pas
+	$\lang{L}_{an}$-définissables.
+\end{exercice}
+
+\begin{answer}
+
+\end{answer}
+
 \end{document}
-
-
