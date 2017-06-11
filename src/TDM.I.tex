@@ -564,9 +564,9 @@ cité dans la définition.
 
 \begin{definition} [Modèle-complète]
 	Soit $\lang{L}$ un langage, et $\theory{T}$ une $\lang{L}$-théorie.
-	On dit que \textbf{$\theory{T}$ est modèle-complète} si toute sous-structure
-	est élémentaire, c'est-à-dire, si pour tous $\struct{A}$, $\struct{B}$ tel
-	que $\struct{A} \substructure \struct{B}$, on a $\struct{A}
+	On dit que \textbf{$\theory{T}$ est modèle-complète} si tous sous-modèles
+	est élémentaire, c'est-à-dire, si pour tous modèles $\struct{A}$,
+	$\struct{B}$ tel que $\struct{A} \substructure \struct{B}$, on a $\struct{A}
 	\elemSubstructure \struct{B}$.
 \end{definition}
 
@@ -929,7 +929,7 @@ Nous sommes alors menés au théorème suivant.
 
 \begin{remarque}
 	La réciproque n'est pas vraie. En effet, la théorie $Th_{\lang{L}}(\real, +,
-	-, ., 0 1)$ est modèle-complète mais n'a pas l'élimination des
+	-, ., 0, 1)$ est modèle-complète mais n'a pas l'élimination des
 	quantificateurs.
 \end{remarque}
 
